@@ -116,5 +116,5 @@ class Game:
         sys.stdout.close()
 
 if __name__ == "__main__":
-    Game("TestCases/gun.txt")
+    Game()
     # Game("TestCases/penta.txt") -- how to override the inLife.txt with a different file
