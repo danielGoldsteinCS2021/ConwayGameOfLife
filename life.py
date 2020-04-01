@@ -27,8 +27,8 @@ class Game:
     def drawGrid(self):
         # Draw the grid
         MARGIN = 0
-        WIDTH = 12
-        HEIGHT = 12
+        WIDTH = 20
+        HEIGHT = 20
         offsetLength = 450 - WIDTH - (self.colLen*WIDTH)//2 # aprox
         offsetHeight = 300 - HEIGHT - (self.rowLen*HEIGHT)//2 # aprox
         BLACK = (0, 0, 0)
@@ -132,7 +132,7 @@ class Game:
             for event in pygame.event.get():  # User did something
                 if event.type == pygame.QUIT:  # If user clicked close
                     done = True  # Flag that we are done so we exit this loop
-            pygame.time.Clock().tick(3)
+            pygame.time.Clock().tick(5)
             self.produceNextGeneration()
     #        self.printGame(i+1)
             self.drawGrid()
