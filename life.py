@@ -16,29 +16,35 @@ class Game:
         self.numOfGen, self.board = self.readFile(fileName) # initalize board and set number of generations
         self.rowLen = len(self.board)
         self.colLen = len(self.board[0])
+        # Set the HEIGHT and WIDTH of the screen
+        WINDOW_SIZE = [900, 600]
+        self.screen = pygame.display.set_mode(WINDOW_SIZE)
+        # Set title of screen
+        pygame.display.set_caption("Conway's Game Of Life")
         self.drawGrid()
         self.startGame()
 
     def drawGrid(self):
         # Draw the grid
-        MARGIN = 0.5
-        WIDTH = 2
-        HEIGHT = 2
+        MARGIN = 0
+        WIDTH = 12
+        HEIGHT = 12
+        offsetLength = 450 - WIDTH - (self.colLen*WIDTH)//2 # aprox
+        offsetHeight = 300 - HEIGHT - (self.rowLen*HEIGHT)//2 # aprox
         BLACK = (0, 0, 0)
         WHITE = (255, 255, 255)
         GREEN = (0, 255, 0)
         RED = (255, 0, 0)
         for r in range(self.rowLen):
             for c in range(self.colLen):
-                color = WHITE
+                color = BLACK
                 if self.board[r][c] == 1:
-                    color = GREEN
-                    pygame.draw.rect(screen,
-                                     color,
-                                     [(MARGIN + WIDTH) * c + MARGIN,
-                                      (MARGIN + HEIGHT) * r + MARGIN,
-                                      WIDTH,
-                                      HEIGHT])
+                    color = (13, 214, 224)
+                pygame.draw.rect(self.screen, color,
+                                [offsetLength+((MARGIN + WIDTH) * c) + MARGIN,
+                                 offsetHeight+((MARGIN + HEIGHT) * r) + MARGIN,
+                                 WIDTH, HEIGHT])
+        pygame.display.flip()
 
     # Reads txt file and creates board
     # as a 2d Array. Sets the number of
@@ -117,28 +123,22 @@ class Game:
     # runs game
     def startGame(self):
         self.printGame(0) # prints intial state
-        self.numOfGen = 1000
-        screen.fill((0,0,0))
+        self.numOfGen = 10000000
+        self.screen.fill((0,0,0))
         done = False
         i = 0
         while(i < self.numOfGen and not done):
             #screen.fill((0,0,0))
             for event in pygame.event.get():  # User did something
                 if event.type == pygame.QUIT:  # If user clicked close
-                    self.numOfGen = 0
-            i+=1
-            done = True  # Flag that we are done so we exit this loop
-            pygame.time.Clock().tick(10)
+                    done = True  # Flag that we are done so we exit this loop
+            pygame.time.Clock().tick(3)
             self.produceNextGeneration()
-        #    self.printGame(i+1)
+    #        self.printGame(i+1)
             self.drawGrid()
+            i+=1
 
 if __name__ == "__main__":
     # Initialize pygame
     pygame.init()
-    # Set the HEIGHT and WIDTH of the screen
-    WINDOW_SIZE = [400, 400]
-    screen = pygame.display.set_mode(WINDOW_SIZE)
-    # Set title of screen
-    pygame.display.set_caption("Conway's Game Of Life")
     Game("test.txt")
