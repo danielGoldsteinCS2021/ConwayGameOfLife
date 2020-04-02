@@ -9,7 +9,7 @@ Cam
 Ellie
 '''
 import pygame
-
+from random import randint
 
 class Game:
     def __init__(self, fileName="inLife.txt"):
@@ -35,11 +35,12 @@ class Game:
         WHITE = (255, 255, 255)
         GREEN = (0, 255, 0)
         RED = (255, 0, 0)
+        aliveColor = (randint(1, 255), randint(1, 255), randint(1, 255))
         for r in range(self.rowLen):
             for c in range(self.colLen):
                 color = BLACK
                 if self.board[r][c] == 1:
-                    color = (13, 214, 224)
+                    color = aliveColor
                 pygame.draw.rect(self.screen, color,
                                 [offsetLength+((MARGIN + WIDTH) * c) + MARGIN,
                                  offsetHeight+((MARGIN + HEIGHT) * r) + MARGIN,
@@ -141,4 +142,4 @@ class Game:
 if __name__ == "__main__":
     # Initialize pygame
     pygame.init()
-    Game("test.txt")
+    Game("69p48.txt")
