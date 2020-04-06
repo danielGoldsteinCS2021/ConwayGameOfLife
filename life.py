@@ -142,4 +142,4 @@ class Game:
 if __name__ == "__main__":
     # Initialize pygame
     pygame.init()
-    Game("69p48.txt")
+    Game("penta.txt")
